@@ -7,8 +7,8 @@ export async function POST(request: Request) {
   await dbConnect();
 
   try {
-    const { username, email, password, ...data } = await request.json();
-    console.log(data)
+    const { username, email, password } = await request.json();
+
     const existingVerifiedUserByUsername = await UserModel.findOne({
       username,
       isVerified: true,
@@ -39,8 +39,8 @@ export async function POST(request: Request) {
       } else {
         const hashedPassword = await bcrypt.hash(password, 10);
         existingUserByEmail.password = hashedPassword;
-        existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000);
         existingUserByEmail.verifyCode = verifyCode;
+        existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000);
         await existingUserByEmail.save();
       }
     } else {
@@ -68,7 +68,6 @@ export async function POST(request: Request) {
       username,
       verifyCode
     );
-    // If server fails to send email then below
     if (!emailResponse.success) {
       return Response.json(
         {
