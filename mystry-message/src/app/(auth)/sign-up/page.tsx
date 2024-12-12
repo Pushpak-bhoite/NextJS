@@ -71,7 +71,8 @@ export default function SignUpForm() {
     checkUsernameUnique();
   }, [debouncedUsername]);
 
-  const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
+  const onSubmit = async (data: z.infer<typeof signUpSchema>, e?: any) => {
+    e.preventDefault()
     setIsSubmitting(true);
     try {
       const response = await axios.post<ApiResponse>('/api/sign-up', data);

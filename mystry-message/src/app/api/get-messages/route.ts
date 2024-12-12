@@ -9,6 +9,7 @@ export async function GET(request: Request) {
   await dbConnect();
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
+  console.log('_user', _user)
 
   if (!session || !_user) {
     return Response.json(
@@ -20,20 +21,22 @@ export async function GET(request: Request) {
   try {
     const user = await UserModel.aggregate([
       { $match: { _id: userId } },
-      { $unwind: '$messages' },
-      { $sort: { 'messages.createdAt': -1 } },
-      { $group: { _id: '$_id', messages: { $push: '$messages' } } },
+      { $unwind: '$message' },
+      { $sort: { 'message.createdAt': -1 } },
+      { $group: { _id: '$_id', messages: { $push: '$message' } } },
     ]).exec();
+
+    console.log('user in messg->', user)
 
     if (!user || user.length === 0) {
       return Response.json(
-        { message: 'User not found', success: false },
+        { message: 'User not found ', success: false },
         { status: 404 }
       );
     }
 
     return Response.json(
-      { messages: user[0].messages },
+      { messages: user[0]?.messages },
       {
         status: 200,
       }
