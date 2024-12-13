@@ -45,7 +45,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log('user>>>>>>>>>', user)
       if (user) {
         token._id = user._id?.toString(); // Convert ObjectId to string
         token.isVerified = user.isVerified;
@@ -55,9 +54,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log('token>>>>>>>>>', token)
-      console.log('NEXTAUTH_SECRET-->', process.env.NEXTAUTH_SECRET)
-
       if (token) {
         session.user._id = token._id;
         session.user.image = null; // inser your profile 

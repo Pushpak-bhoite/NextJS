@@ -7,7 +7,6 @@
 
     // Define the API route handler
     export async function GET(req: NextRequest) {
-        console.log('---------------------')
     try {
         // Make the API call to OpenAI
 

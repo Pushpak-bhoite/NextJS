@@ -38,14 +38,10 @@ export default function SignInForm() {
         identifier: data.identifier,
         password: data.password,
       });
-      console.log(result)
-
       // if (result?.status === 200 || result?.url) {
-      console.log('-----------------------')
       router.replace('/dashboard');
       // }
     } catch (error) {
-      console.log('error -->', error)
       if (result?.error) {
         if (result.error === 'CredentialsSignin') {
           toast({

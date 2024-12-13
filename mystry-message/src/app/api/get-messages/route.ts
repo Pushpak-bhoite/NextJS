@@ -9,8 +9,6 @@ export async function GET(request: Request) {
   await dbConnect();
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
-  console.log('_user', _user)
-
   if (!session || !_user) {
     return Response.json(
       { success: false, message: 'Not authenticated' },
@@ -26,8 +24,6 @@ export async function GET(request: Request) {
       { $group: { _id: '$_id', messages: { $push: '$message' } } },
     ]).exec();
 
-    console.log('user in messg->', user)
-
     if (!user || user.length === 0) {
       return Response.json(
         { message: 'User not found ', success: false },
@@ -42,7 +38,6 @@ export async function GET(request: Request) {
       }
     );
   } catch (error) {
-    console.error('An unexpected error occurred:', error);
     return Response.json(
       { message: 'Internal server error', success: false },
       { status: 500 }

@@ -4,7 +4,7 @@
 import { serverSideFunnction } from "@/app/utils/server-utils"
 
 export default function page() {
-    console.log(serverSideFunnction(),'---> client-route')
+    console.log(serverSideFunnction(),'---> client-route') 
     let result = serverSideFunnction()
 
     return (

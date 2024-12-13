@@ -20,7 +20,6 @@ export async function GET(request: Request) {
 
         if (!result.success) {
             const usernameErrors = result.error.format().username?._errors || [];
-            console.log('error-->',usernameErrors)
             return Response.json(
                 {
                     success: false,
@@ -58,7 +57,6 @@ export async function GET(request: Request) {
             { status: 200 }
         );
     } catch (error) {
-        console.error('Error checking username:', error);
         return Response.json(
             {
                 success: false,

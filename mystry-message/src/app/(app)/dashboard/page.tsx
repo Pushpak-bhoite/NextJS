@@ -36,13 +36,10 @@ function UserDashboard() {
     const { register, watch, setValue } = form;
     const acceptMessages = watch('acceptMessages');
 
-    console.log('acceptMessages', acceptMessages)
-
     const fetchAcceptMessages = useCallback(async () => {
         setIsSwitchLoading(true);
         try {
             const response = await axios.get<ApiResponse>('/api/accept-messages');
-            console.log('response.data.isAcceptingMessage', response)
             setValue('acceptMessages', response.data.isAcceptingMessage);
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponse>;
@@ -63,8 +60,6 @@ function UserDashboard() {
             setIsSwitchLoading(false);
             try {
                 const response = await axios.get<ApiResponse>('/api/get-messages');
-
-                console.log('messages->',response)
 
                 setMessages(response.data.messages || []);
                 if (refresh) {
