@@ -1,8 +1,3 @@
-
-
-
-
-
 'use client';
 
 import { ApiResponse } from '@/types/ApiResponse';
@@ -130,11 +125,10 @@ export default function SignUpForm() {
                   {isCheckingUsername && <Loader2 className="animate-spin" />}
                   {!isCheckingUsername && usernameMessage && (
                     <p
-                      className={`text-sm ${
-                        usernameMessage === 'Username is unique'
-                          ? 'text-green-500'
-                          : 'text-red-500'
-                      }`}
+                      className={`text-sm ${usernameMessage === 'Username is unique'
+                        ? 'text-green-500'
+                        : 'text-red-500'
+                        }`}
                     >
                       {usernameMessage}
                     </p>

@@ -41,6 +41,12 @@
 
 
 
+
+
+
+
+
+
 // src/app/api/ai-messages/route.ts
 import { NextRequest } from 'next/server';
 import { GoogleGenerativeAI } from "@google/generative-ai";

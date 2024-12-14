@@ -33,7 +33,6 @@ export default function VerifyAccount() {
         code: data.code,
       });
 
-
       toast({
         title: 'Success',
         description: response.data.message,

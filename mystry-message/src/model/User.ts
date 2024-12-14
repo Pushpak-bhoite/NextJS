@@ -14,9 +14,9 @@ export interface User extends Document {
     verifyCodeExpiry: Date,
     isVerified: boolean
     isAcceptingMessage: boolean,
-    message: Message[]
+    message: Message[],
+    createdAt: Date;
 }
-
 
 const MessageSchema: Schema<Message> = new Schema({
     content: {
@@ -66,6 +66,10 @@ const UserSchema: Schema<User> = new Schema({
     },
     message: {
         type: [MessageSchema]
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now  // Automatically sets the current date on creation
     }
 })
 
